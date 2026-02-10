@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.mesh-ai-gateway.io/config.schema.json",
+  "config_store": {
+    "enabled": true,
+    "type": "sqlite",
+    "config": {
+      "path": "../.github/workflows/configs/withconfigstorelogsstoresqlite/config.db"
+    }
+  },
+  "logs_store": {
+    "enabled": true,
+    "type": "sqlite",
+    "config": {
+      "path": "../.github/workflows/configs/withconfigstorelogsstoresqlite/logs.db"
+    }
+  }
+}
