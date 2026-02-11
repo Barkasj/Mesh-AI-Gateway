@@ -1,3 +1,8 @@
+{{/*
+  Compatibility note:
+  This chart is branded for Mesh AI Gateway, but helper names and values keys keep the
+  historical `bifrost.*` shape to preserve compatibility with upstream and existing values files.
+*/}}
 {{- define "bifrost.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
@@ -334,7 +339,7 @@ false
 {{- $_ := set $config "governance" $governance }}
 {{- end }}
 {{- end }}
-{{- /* Top-level Auth Config - for main Bifrost authentication */ -}}
+{{- /* Top-level Auth Config - for main Mesh AI Gateway authentication */ -}}
 {{- if .Values.bifrost.authConfig }}
 {{- $authConfig := dict }}
 {{- /* Only use env var reference if governance auth secret is NOT already configured (to avoid referencing uninjected env vars) */ -}}

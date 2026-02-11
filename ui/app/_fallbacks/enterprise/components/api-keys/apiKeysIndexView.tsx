@@ -51,7 +51,7 @@ curl --location 'http://localhost:8080/v1/chat/completions'
 						</Link>
 						.<br />
 						<br />
-						Once generated you will need to use this API key for all API calls to the Bifrost admin APIs and UI.
+						Once generated you will need to use this API key for all API calls to the Mesh AI Gateway admin APIs and UI.
 					</p>
 				</AlertDescription>
 			</Alert>
@@ -74,7 +74,7 @@ curl --location 'http://localhost:8080/v1/chat/completions'
 							</>
 						) : (
 							<>
-								Use Basic auth with your admin credentials when making API calls to Bifrost. Encode your credentials in the standard{" "}
+								Use Basic auth with your admin credentials when making API calls to Mesh AI Gateway. Encode your credentials in the standard{" "}
 								<code className="bg-muted rounded px-1 py-0.5 text-sm">username:password</code> format with base64 encoding.
 							</>
 						)}
@@ -102,7 +102,7 @@ curl --location 'http://localhost:8080/v1/chat/completions'
 				icon={<KeyRound size={48} />}
 				title="Scope Based API Keys"
 				description="Need granular access control with scope-based API keys? Enterprise customers can create multiple API keys with specific permissions for different services, teams, or environments."
-				readmeLink="https://docs.getbifrost.io/enterprise/api-keys"
+				readmeLink="https://docs.mesh-ai-gateway.io/enterprise/api-keys"
 			/>
 		</div>
 	);

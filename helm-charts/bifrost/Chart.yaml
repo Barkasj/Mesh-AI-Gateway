@@ -1,6 +1,6 @@
 apiVersion: v2
 name: bifrost
-description: A Helm chart for deploying Bifrost - AI Gateway with unified interface for multiple providers
+description: A Helm chart for deploying Mesh AI Gateway (Bifrost-compatible)
 type: application
 version: 2.0.4
 appVersion: "1.4.3"
@@ -14,7 +14,7 @@ home: https://github.com/mesh-ai-gateway/mesh-ai-gateway
 sources:
   - https://github.com/mesh-ai-gateway/mesh-ai-gateway
 maintainers:
-  - name: Bifrost Team
+  - name: Mesh AI Gateway Team
     email: community@mesh-ai-gateway.io
 icon: https://docs.mesh-ai-gateway.io/favicon.ico
 
