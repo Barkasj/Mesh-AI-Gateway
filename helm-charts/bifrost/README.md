@@ -1,10 +1,10 @@
-# Bifrost Helm Charts
+# Mesh AI Gateway Helm Chart (Bifrost-compatible)
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/bifrost)](https://artifacthub.io/packages/helm/bifrost/bifrost)
 
-Official Helm charts for deploying [Bifrost](https://github.com/maximhq/bifrost) - a high-performance AI gateway with unified interface for multiple providers.
+Official Helm chart for deploying **Mesh AI Gateway** with a unified interface for multiple LLM providers. The chart name and values prefix remain `bifrost` for upstream compatibility.
 
-**Latest Version:** 2.0.2
+**Latest Version:** 2.0.4
 
 ## Changelog
 
@@ -28,7 +28,7 @@ This release fixes the multi-attach volume error when running multiple replicas 
 
 #### What Changed
 
-- When using `storage.mode: sqlite` with `storage.persistence.enabled: true`, Bifrost now deploys as a **StatefulSet** instead of a Deployment
+- When using `storage.mode: sqlite` with `storage.persistence.enabled: true`, Mesh AI Gateway now deploys as a **StatefulSet** instead of a Deployment
 - Each pod gets its own dedicated PersistentVolumeClaim (e.g., `data-bifrost-0`, `data-bifrost-1`, `data-bifrost-2`)
 - A headless service is created for StatefulSet DNS resolution
 - HorizontalPodAutoscaler now correctly references StatefulSet or Deployment based on storage configuration
@@ -51,7 +51,7 @@ Since Kubernetes doesn't allow in-place conversion from Deployment to StatefulSe
 1. Back up your data (if needed)
 2. Uninstall the existing release: `helm uninstall bifrost`
 3. Delete the old PVC: `kubectl delete pvc bifrost-data`
-4. Install with the new chart version: `helm install bifrost bifrost/bifrost --set image.tag=<latest-image>`
+4. Install with the new chart version: `helm install bifrost ./bifrost --set image.tag=<latest-image>`
 
 **Note:** For production high-availability setups, we recommend using PostgreSQL mode which scales horizontally without these concerns.
 
@@ -62,14 +62,12 @@ Since Kubernetes doesn't allow in-place conversion from Deployment to StatefulSe
 ## Quick Start
 
 ```bash
-# Add the Bifrost Helm repository
-helm repo add bifrost https://maximhq.github.io/bifrost/helm-charts
+# Clone the repository
+git clone https://github.com/mesh-ai-gateway/mesh-ai-gateway.git
+cd mesh-ai-gateway/helm-charts
 
-# Update your local Helm chart repository cache
-helm repo update
-
-# Install Bifrost with default configuration (SQLite storage)
-helm install bifrost bifrost/bifrost --set image.tag=v1.4.3
+# Install Mesh AI Gateway with default configuration (SQLite storage)
+helm install bifrost ./bifrost --set image.tag=v1.5.2
 ```
 
 ## Prerequisites
@@ -80,26 +78,25 @@ helm install bifrost bifrost/bifrost --set image.tag=v1.4.3
 
 ## Installation
 
-### From Helm Repository (Recommended)
+### From Source (Recommended)
 
 ```bash
-# Add repository
-helm repo add bifrost https://maximhq.github.io/bifrost/helm-charts
-helm repo update
+# Clone repository
+git clone https://github.com/mesh-ai-gateway/mesh-ai-gateway.git
+cd mesh-ai-gateway/helm-charts
 
 # Install with default values
-helm install bifrost bifrost/bifrost --set image.tag=v1.4.3
+helm install bifrost ./bifrost --set image.tag=v1.5.2
 
 # Or install with custom values
-helm install bifrost bifrost/bifrost -f my-values.yaml
+helm install bifrost ./bifrost -f my-values.yaml
 ```
 
-### From Source
+### From Existing Local Checkout
 
 ```bash
-# Clone the repository
-git clone https://github.com/maximhq/bifrost.git
-cd bifrost/helm-charts
+# If you already cloned the repository:
+cd mesh-ai-gateway/helm-charts
 
 # Install from local chart
 helm install bifrost ./bifrost --set image.tag=v1.5.2
@@ -110,7 +107,7 @@ helm install bifrost ./bifrost --set image.tag=v1.5.2
 Use the included installation script for guided setup:
 
 ```bash
-cd bifrost/helm-charts/bifrost
+cd mesh-ai-gateway/helm-charts/bifrost
 ./scripts/install.sh
 ```
 
@@ -120,11 +117,11 @@ cd bifrost/helm-charts/bifrost
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
-| `image.repository` | Container image repository | `docker.io/maximhq/bifrost` |
+| `image.repository` | Container image repository | `ghcr.io/mesh-ai-gateway/mesh-ai-gateway` |
 | `image.tag` | Container image tag (required) | `""` |
 | `image.pullPolicy` | Image pull policy | `IfNotPresent` |
 
-> **Important:** You must specify the `image.tag`. See available tags at [Docker Hub](https://hub.docker.com/r/maximhq/bifrost/tags).
+> **Important:** You must specify the `image.tag`. See published tags in the [GitHub Container Registry package](https://github.com/mesh-ai-gateway/mesh-ai-gateway/pkgs/container/mesh-ai-gateway).
 
 ### Enterprise Private Registry
 
@@ -133,22 +130,22 @@ For enterprise customers with private container registries, simply override the 
 ```yaml
 # Google Artifact Registry
 image:
-  repository: us-west1-docker.pkg.dev/bifrost-enterprise/your-org/bifrost
+  repository: us-west1-docker.pkg.dev/mesh-ai-gateway/your-org/mesh-ai-gateway
   tag: v1.5.0
 
 # AWS ECR
 image:
-  repository: 123456789.dkr.ecr.us-east-1.amazonaws.com/bifrost
+  repository: 123456789.dkr.ecr.us-east-1.amazonaws.com/mesh-ai-gateway
   tag: v1.5.0
 
 # Azure Container Registry
 image:
-  repository: yourregistry.azurecr.io/bifrost
+  repository: yourregistry.azurecr.io/mesh-ai-gateway
   tag: v1.5.0
 
 # Self-hosted registry
 image:
-  repository: registry.yourcompany.com/ai/bifrost
+  repository: registry.yourcompany.com/ai/mesh-ai-gateway
   tag: v1.5.0
 ```
 
@@ -156,7 +153,7 @@ If your private registry requires authentication, configure `imagePullSecrets`:
 
 ```yaml
 image:
-  repository: us-west1-docker.pkg.dev/bifrost-enterprise/your-org/bifrost
+  repository: us-west1-docker.pkg.dev/mesh-ai-gateway/your-org/mesh-ai-gateway
   tag: v1.5.0
 
 imagePullSecrets:
@@ -174,7 +171,7 @@ kubectl create secret docker-registry my-registry-secret \
 
 ### Storage Configuration
 
-Bifrost supports two storage backends (SQLite and PostgreSQL) that can be configured independently for config and logs stores.
+Mesh AI Gateway supports two storage backends (SQLite and PostgreSQL) that can be configured independently for config and logs stores.
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
@@ -210,15 +207,15 @@ postgresql:
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `postgresql.enabled` | Deploy PostgreSQL | `false` |
-| `postgresql.auth.username` | Database username | `bifrost` |
-| `postgresql.auth.password` | Database password | `bifrost_password` |
-| `postgresql.auth.database` | Database name | `bifrost` |
+| `postgresql.auth.username` | Database username | `mesh_gateway` |
+| `postgresql.auth.password` | Database password | `mesh_gateway_password` |
+| `postgresql.auth.database` | Database name | `mesh_gateway` |
 | `postgresql.external.enabled` | Use external PostgreSQL | `false` |
 | `postgresql.external.host` | External PostgreSQL host | `""` |
 
 ### Vector Store Configuration (Semantic Caching)
 
-Bifrost supports multiple vector stores for semantic caching:
+Mesh AI Gateway supports multiple vector stores for semantic caching:
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
@@ -267,7 +264,7 @@ vectorStore:
     #   host: "qdrant.example.com"
 ```
 
-### Bifrost Application Configuration
+### Mesh AI Gateway Application Configuration
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
@@ -349,14 +346,14 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
-    - host: bifrost.example.com
+    - host: mesh-ai-gateway.example.com
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: bifrost-tls
+    - secretName: mesh-ai-gateway-tls
       hosts:
-        - bifrost.example.com
+        - mesh-ai-gateway.example.com
 ```
 
 ### Auto-scaling Configuration
@@ -393,7 +390,7 @@ The chart includes pre-configured examples in `values-examples/`:
 ```bash
 # From Helm repository
 helm install bifrost bifrost/bifrost \
-  -f https://raw.githubusercontent.com/maximhq/bifrost/main/helm-charts/bifrost/values-examples/postgres-only.yaml \
+  -f https://raw.githubusercontent.com/mesh-ai-gateway/mesh-ai-gateway/main/helm-charts/bifrost/values-examples/postgres-only.yaml \
   --set image.tag=v1.5.2
 
 # From local source
@@ -446,14 +443,14 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
-    - host: bifrost.yourdomain.com
+    - host: mesh-ai-gateway.yourdomain.com
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: bifrost-tls
+    - secretName: mesh-ai-gateway-tls
       hosts:
-        - bifrost.yourdomain.com
+        - mesh-ai-gateway.yourdomain.com
 
 bifrost:
   client:
@@ -492,9 +489,9 @@ helm uninstall bifrost
 kubectl delete pvc -l app.kubernetes.io/name=bifrost
 ```
 
-## Accessing Bifrost
+## Accessing Mesh AI Gateway
 
-After installation, access Bifrost using one of these methods:
+After installation, access Mesh AI Gateway using one of these methods:
 
 ### Port Forwarding (Development)
 
@@ -516,7 +513,7 @@ Configure the `ingress` section as shown above.
 
 ## Monitoring
 
-Bifrost exposes Prometheus metrics at `/metrics`:
+Mesh AI Gateway exposes Prometheus metrics at `/metrics`:
 
 ```bash
 # Get metrics
@@ -531,7 +528,7 @@ bifrost:
     otel:
       enabled: true
       config:
-        service_name: "bifrost"
+        service_name: "mesh-ai-gateway"
         collector_url: "http://otel-collector:4317"
         trace_type: "otel"
         protocol: "grpc"
@@ -579,15 +576,15 @@ kubectl get secret bifrost -o yaml
 
 ## Resources
 
-- [Bifrost Documentation](https://docs.mesh-ai-gateway.io)
-- [GitHub Repository](https://github.com/maximhq/bifrost)
-- [Docker Hub](https://hub.docker.com/r/maximhq/bifrost)
+- [Mesh AI Gateway Documentation](https://docs.mesh-ai-gateway.io)
+- [GitHub Repository](https://github.com/mesh-ai-gateway/mesh-ai-gateway)
+- [Container Registry](https://github.com/mesh-ai-gateway/mesh-ai-gateway/pkgs/container/mesh-ai-gateway)
 - [Discord Community](https://discord.gg/exN5KAydbU)
 
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE](../LICENSE) file for details.
 
-Built with ❤️ by [Maxim](https://github.com/maximhq)
+Maintained by the Mesh AI Gateway community.
 
 

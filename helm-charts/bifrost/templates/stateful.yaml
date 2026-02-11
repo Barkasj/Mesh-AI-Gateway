@@ -2,7 +2,7 @@
 {{- $useStatefulSet := and (eq .Values.storage.mode "sqlite") .Values.storage.persistence.enabled (not .Values.storage.persistence.existingClaim) }}
 {{- if $useStatefulSet }}
 {{- if not .Values.image.tag }}
-{{- fail "ERROR: image.tag is required. Please specify the Bifrost image version (e.g., --set image.tag=v1.3.36). See available tags at https://hub.docker.com/r/maximhq/bifrost/tags" }}
+{{- fail "ERROR: image.tag is required. Please specify the Mesh AI Gateway image version (e.g., --set image.tag=v1.5.2). See available tags at https://github.com/mesh-ai-gateway/mesh-ai-gateway/pkgs/container/mesh-ai-gateway" }}
 {{- end }}
 {{- include "bifrost.validate" . }}
 apiVersion: apps/v1

@@ -98,7 +98,7 @@ export default function LoginView() {
 				<div className="w-full max-w-md">
 					<div className="border-border bg-card w-full space-y-6 rounded-lg border p-8 shadow-sm">
 						<div className="flex items-center justify-center">
-							<Image src={logoSrc} alt="Bifrost" width={160} height={26} priority className="" />
+							<Image src={logoSrc} alt="Mesh AI Gateway" width={160} height={26} priority className="" />
 						</div>
 						<div className="flex items-center justify-center py-8">
 							<div className="text-muted-foreground text-sm">Checking authentication...</div>
@@ -115,7 +115,7 @@ export default function LoginView() {
 				<div className="border-border bg-card w-full space-y-6 rounded-lg border p-8 shadow-sm">
 					{/* Logo */}
 					<div className="flex items-center justify-center">
-						<Image src={logoSrc} alt="Bifrost" width={160} height={26} priority className="" />
+						<Image src={logoSrc} alt="Mesh AI Gateway" width={160} height={26} priority className="" />
 					</div>
 
 					<div className="space-y-2 text-center">
