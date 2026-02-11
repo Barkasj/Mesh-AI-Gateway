@@ -8,7 +8,7 @@ export default function SCIMView() {
 				className="mx-auto min-h-[80vh]"
 				icon={<BookUser className="h-[5.5rem] w-[5.5rem]" strokeWidth={1} />}
 				title="Unlock SCIM based access management for user provisioning"
-				description="This feature is a part of the Bifrost enterprise license. We would love to know more about your use case and how we can help you."
+				description="This feature is part of Mesh AI Gateway Enterprise. We would love to know more about your use case and how we can help you."
 				readmeLink="https://docs.mesh-ai-gateway.io/enterprise/advanced-governance"
 			/>
 		</div>

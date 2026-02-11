@@ -8,7 +8,7 @@ export default function MCPToolGroups() {
 				className="mx-auto min-h-[80vh]"
 				icon={<ToolCase className="h-[5.5rem] w-[5.5rem]" strokeWidth={1} />}
 				title="Unlock MCP Tool Groups"
-				description="This feature is a part of the Bifrost enterprise license. Configure tool groups for MCP servers to organize your MCP tools and govern them across your organization."
+				description="This feature is part of Mesh AI Gateway Enterprise. Configure tool groups for MCP servers to organize your MCP tools and govern them across your organization."
 				readmeLink="https://docs.mesh-ai-gateway.io/mcp/overview"
 			/>
 		</div>

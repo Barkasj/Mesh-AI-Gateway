@@ -26,7 +26,7 @@ export default function ContactUsView({ icon, title, description, className, rea
 						aria-label="Read more about this feature (opens in new tab)"
 						className="mx-auto mt-6"
 						onClick={() => {
-							window.open(`${readmeLink}?utm_source=bfd`, "_blank", "noopener,noreferrer");
+							window.open(`${readmeLink}?utm_source=mesh-gateway`, "_blank", "noopener,noreferrer");
 						}}
 					>
 						Read more <ArrowUpRight className="text-muted-foreground h-3 w-3" />
@@ -35,7 +35,7 @@ export default function ContactUsView({ icon, title, description, className, rea
 						className="mx-auto mt-6"
 						aria-label="Book a demo (opens Calendly in new tab)"
 						onClick={() => {
-							window.open("https://calendly.com/maximai/bifrost-demo?utm_source=bfd_ent", "_blank", "noopener,noreferrer");
+							window.open("https://calendly.com/maximai/bifrost-demo?utm_source=mesh-gateway-ent", "_blank", "noopener,noreferrer");
 						}}
 					>
 						Book a demo
