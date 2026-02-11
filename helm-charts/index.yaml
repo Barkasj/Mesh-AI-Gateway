@@ -3,10 +3,9 @@ entries:
   bifrost:
   - apiVersion: v2
     appVersion: 1.4.3
-    created: "2026-02-10T23:48:03.038152417Z"
-    description: A Helm chart for deploying Bifrost - AI Gateway with unified interface
-      for multiple providers
-    digest: c10c4e1a94c7e7063085dfe094f9838beefe6322a279802937d4bade5c65c0c7
+    created: "2026-02-11T00:20:55.356179131Z"
+    description: A Helm chart for deploying Mesh AI Gateway (Bifrost-compatible)
+    digest: cf6ed2705069fc75570f87ada6f897c25d48008f6ef289b099ad15fcb6caf945
     home: https://github.com/mesh-ai-gateway/mesh-ai-gateway
     icon: https://docs.mesh-ai-gateway.io/favicon.ico
     keywords:
@@ -17,7 +16,7 @@ entries:
     - anthropic
     maintainers:
     - email: community@mesh-ai-gateway.io
-      name: Bifrost Team
+      name: Mesh AI Gateway Team
     name: bifrost
     sources:
     - https://github.com/mesh-ai-gateway/mesh-ai-gateway
@@ -433,4 +432,4 @@ entries:
     urls:
     - https://github.com/maximhq/bifrost/releases/download/helm-chart-v1.3.5/bifrost-1.3.5.tgz
     version: 1.3.5
-generated: "2026-02-10T23:48:03.035919698Z"
+generated: "2026-02-11T00:20:55.354053625Z"

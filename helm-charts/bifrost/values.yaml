@@ -1,22 +1,22 @@
-# Default values for Bifrost
+# Default values for Mesh AI Gateway (Bifrost-compatible chart)
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# Bifrost application configuration
+# Mesh AI Gateway application configuration
 replicaCount: 1
 
 image:
   # Container image repository
   # Default: Docker Hub public image
   # For enterprise customers with private registry, use full URL:
-  #   repository: us-west1-docker.pkg.dev/bifrost-enterprise/your-org/bifrost
-  #   repository: your-registry.example.com/your-org/bifrost
-  #   repository: 123456789.dkr.ecr.us-east-1.amazonaws.com/bifrost
-  repository: docker.io/maximhq/bifrost
+  #   repository: us-west1-docker.pkg.dev/mesh-ai-gateway/your-org/mesh-ai-gateway
+  #   repository: your-registry.example.com/your-org/mesh-ai-gateway
+  #   repository: 123456789.dkr.ecr.us-east-1.amazonaws.com/mesh-ai-gateway
+  repository: ghcr.io/mesh-ai-gateway/mesh-ai-gateway
   pullPolicy: IfNotPresent
   # REQUIRED: Specify the image tag (e.g., v1.5.0, latest)
   # Docker images are tagged with v prefix (e.g., v1.5.0)
-  # See available tags at: https://hub.docker.com/r/maximhq/bifrost/tags
+  # See available tags at: https://github.com/mesh-ai-gateway/mesh-ai-gateway/pkgs/container/mesh-ai-gateway
   tag: ""
 
 imagePullSecrets: []
@@ -71,7 +71,7 @@ ingress:
   className: ""
   annotations: {}
   hosts:
-    - host: bifrost.local
+    - host: mesh-ai-gateway.local
       paths:
         - path: /
           pathType: Prefix
@@ -122,7 +122,7 @@ tolerations: []
 
 affinity: {}
 
-# Bifrost specific configuration
+# Mesh AI Gateway specific configuration
 # You can find entire schema at https://schema.mesh-ai-gateway.io/config.schema.json
 bifrost:
   # Application settings
@@ -137,7 +137,7 @@ bifrost:
   encryptionKey: ""
 
   # Authentication configuration (top-level)
-  # This controls authentication for Bifrost API and dashboard
+  # This controls authentication for Mesh AI Gateway API and dashboard
   authConfig:
     adminUsername: ""
     adminPassword: ""
@@ -262,7 +262,7 @@ bifrost:
     otel:
       enabled: false
       config:
-        service_name: "bifrost"
+        service_name: "mesh-ai-gateway"
         collector_url: ""
         trace_type: "otel"
         protocol: "grpc"
@@ -270,7 +270,7 @@ bifrost:
     datadog:
       enabled: false
       config:
-        service_name: "bifrost"
+        service_name: "mesh-ai-gateway"
         agent_addr: "localhost:8126"
         env: ""
         version: ""
@@ -330,8 +330,8 @@ bifrost:
   cluster:
     enabled: false
     peers: []
-      # - "bifrost-0.bifrost-headless:7946"
-      # - "bifrost-1.bifrost-headless:7946"
+      # - "mesh-ai-gateway-0.bifrost-headless:7946"
+      # - "mesh-ai-gateway-1.bifrost-headless:7946"
     gossip:
       port: 7946
       config:
@@ -453,9 +453,9 @@ postgresql:
     enabled: false
     host: ""
     port: 5432
-    user: bifrost
+    user: mesh_gateway
     password: ""
-    database: bifrost
+    database: mesh_gateway
     sslMode: disable
     # Use existing Kubernetes secret for password (takes precedence over password field)
     existingSecret: ""
@@ -469,9 +469,9 @@ postgresql:
 
   # PostgreSQL subchart configuration (when postgresql.enabled is true)
   auth:
-    username: bifrost
-    password: bifrost_password
-    database: bifrost
+    username: mesh_gateway
+    password: mesh_gateway_password
+    database: mesh_gateway
 
   primary:
     persistence:
