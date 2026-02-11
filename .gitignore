@@ -56,6 +56,10 @@ test-reports
 opencode.json*
 package-lock.json
 
+# OpenCode dependencies
+opencode.jsonc
+.opencode/
+
 # Python specific
 **/__pycache__/**
 **/venv/
