@@ -52,6 +52,9 @@ test-reports
 .claude/
 .codex/
 .cursor/
+.opencode/
+opencode.json*
+package-lock.json
 
 # Python specific
 **/__pycache__/**
