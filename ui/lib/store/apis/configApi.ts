@@ -4,7 +4,7 @@ import axios from "axios";
 import { baseApi } from "./baseApi";
 
 const LATEST_RELEASE_URL = process.env.NEXT_PUBLIC_MESH_GATEWAY_RELEASE_API_URL || "https://releases.mesh-ai-gateway.io/latest-release";
-const LEGACY_LATEST_RELEASE_URL = "https://github.com/mesh-ai-gateway/mesh-ai-gateway/latest-release";
+const LEGACY_LATEST_RELEASE_URL = "https://getbifrost.ai/latest-release";
 const RELEASE_URLS = LATEST_RELEASE_URL === LEGACY_LATEST_RELEASE_URL ? [LATEST_RELEASE_URL] : [LATEST_RELEASE_URL, LEGACY_LATEST_RELEASE_URL];
 
 export const configApi = baseApi.injectEndpoints({

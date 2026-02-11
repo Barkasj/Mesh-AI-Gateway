@@ -14,7 +14,6 @@ const (
 
 const (
 	defaultPricingURL = "https://pricing.mesh-ai-gateway.io/datasheet"
-	legacyPricingURL  = "https://pricing.mesh-ai-gateway.io/datasheet"
 )
 
 // DefaultPricingURL returns the default pricing URL used by model catalog sync.
@@ -24,11 +23,6 @@ func DefaultPricingURL() string {
 		return url
 	}
 	return defaultPricingURL
-}
-
-// LegacyPricingURL is kept for compatibility with existing deployments.
-func LegacyPricingURL() string {
-	return legacyPricingURL
 }
 
 // Config is the model pricing configuration.
