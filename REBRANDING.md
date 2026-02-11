@@ -39,15 +39,45 @@ Dokumen ini menjelaskan pendekatan rebranding dari upstream Bifrost ke distribus
 - `MESH_GATEWAY_CACHE_NAMESPACE`: namespace cache binary local.
 - `NEXT_PUBLIC_MESH_GATEWAY_RELEASE_API_URL`: endpoint latest release untuk UI.
 
-## Aturan Sync Upstream
+## Upstream Sync Playbook
 
-1. Pull/merge upstream ke branch integrasi.
-2. Jalankan audit rebranding (`.github/workflows/scripts/rebranding-audit.sh`).
-3. Perbaiki hanya surface branding layer yang terdampak.
-4. Hindari edit massal import/module path internal upstream.
-5. Pastikan perubahan lolos test/build sebelum release.
+1. Tarik perubahan upstream ke branch integrasi (`upstream-sync/*`).
+2. Jalankan guardrail rebranding:
+   - `.github/workflows/scripts/rebranding-audit.sh`
+3. Jalankan verifikasi teknis minimum:
+   - `go test ./bifrost-http/lib ./bifrost-http/server` (dari folder `transports`)
+   - `helm lint helm-charts/bifrost --set image.tag=<tag>`
+   - `helm template mesh-ai-gateway helm-charts/bifrost --set image.tag=<tag>`
+4. Jika audit gagal, lakukan patch hanya pada surface branding (URL/copy/default config), jangan menyentuh import path internal upstream.
+5. Push perubahan sebagai PR terpisah:
+   - PR-A: runtime/compatibility
+   - PR-B: docs/ui/helm
+
+## Aturan Patch (Minim Konflik)
+
+1. Pertahankan struktur internal upstream (`github.com/maximhq/bifrost`, key `bifrost.*`) untuk menghindari konflik merge besar.
+2. Centralize identitas publik di branding layer/env var, bukan replace string masif lintas package.
+3. Legacy fallback hanya di titik yang disengaja:
+   - schema lama (`https://www.getbifrost.ai/schema`)
+   - release API lama (`https://getbifrost.ai/latest-release`)
+   - download endpoint lama (`https://downloads.getmaxim.ai`)
+4. Selain allowlist di atas, referensi vendor/domain lama harus dianggap regression dan diblokir CI.
+5. Untuk perubahan Helm, utamakan copy publik + default image/referensi docs; key kompatibilitas tetap dipertahankan.
+
+## Checklist Rebranding v1
+
+- [x] Runtime branding layer (`transports/bifrost-http/lib/branding.go`)
+- [x] Runtime compatibility fallback (host/config dir/schema/release URL)
+- [x] CI guardrail rebranding (`rebranding-audit.yml` + script)
+- [x] Allowlist legacy fallback terbatas dan eksplisit
+- [x] UI fallback enterprise copy/link distandarkan ke Mesh AI Gateway
+- [x] Helm copy + docs + default image dibersihkan dari referensi vendor lama
+- [x] Helm `NOTES.txt`, `values.yaml`, `_helpers.tpl`, `README.md` konsisten
+- [x] Helm smoke validation (`helm lint`, `helm template`)
+- [x] Smoke test migrasi config dir/schema (fresh install + legacy fallback)
+- [ ] Manual UI visual regression check (desktop/mobile) pasca-merge
 
 ## Catatan
 
-- Rebranding penuh seluruh string historis lintas dokumentasi besar dilakukan bertahap.
-- Prioritas awal: runtime path kritis, URL kritis, konfigurasi, dan alat distribusi.
+- Rebranding lintas dokumen besar tetap dilakukan bertahap untuk menjaga ukuran diff.
+- Fokus v1 adalah mengurangi vendor lock-in tanpa mengorbankan jalur sinkronisasi upstream.

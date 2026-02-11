@@ -30,7 +30,7 @@ TARGETS=(
   ".github/workflows/scripts/run-migration-tests.sh"
 )
 
-BANNED_REGEX='docs\.getbifrost\.ai|https?://(www\.)?getbifrost\.ai|https?://(www\.)?getmaxim\.ai/bifrost|https?://getmax\.im/bifrost-discord|https?://downloads\.getmaxim\.ai'
+BANNED_REGEX='docs\.getbifrost\.ai|https?://(www\.)?getbifrost\.ai|https?://(www\.)?getmaxim\.ai/bifrost|https?://getmax\.im/bifrost-discord|https?://downloads\.getmaxim\.ai|https?://github\.com/maximhq/bifrost|https?://hub\.docker\.com/r/maximhq/bifrost|https?://maximhq\.github\.io/bifrost/helm-charts|docker\.io/maximhq/bifrost'
 
 EXISTING_TARGETS=()
 for target in "${TARGETS[@]}"; do
